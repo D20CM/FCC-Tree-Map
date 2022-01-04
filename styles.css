@@ -1,0 +1,17 @@
+#graph-area {
+  background-color: brown;
+  height: 400px;
+  width: 400px;
+}
+
+.twentysixhundred {
+  background-color: burlywood;
+}
+
+.wii {
+  background-color: cadetblue;
+}
+
+.console-area:nth-child(even) {
+  background-color: rgb(184, 184, 184);
+}
