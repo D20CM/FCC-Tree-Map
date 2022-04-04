@@ -1,27 +1,43 @@
+:root{
+  --twentysixhundred-color: #ff454b;
+  --wii-color: #3a73af;
+  --nes-color: #79ba7d;
+  --gb-color: pink;
+  --ds-color: #fff873;
+  --x360-color: #8bd6d5;
+  --ps3-color: violet;
+  --ps2-color: #ffc14d;
+  --snes-color: beige;
+  --gba-color: brown;
+  --ps4-color: cadetBlue;
+  --threeds-color: #fa5269;
+  --n64-color: #8aa181;
+  --ps-color: #b17fc7;
+  --xb-color: darkSalmon;
+  --pc-color: deepSkyBlue;
+  --psp-color: indianRed;
+  --xone-color: khaki;
+
+}
+
 * {
   margin: 0;
   box-sizing: border-box;
 }
 
-h1 {
-  /* color: rgb(137, 12, 175); */
-  /* background-color: yellow; */
-  margin: 0;
+body{
+  background-color: #f8f5e4;
   text-align: center;
+}
+
+h1 {
   padding: 2rem;
   font-size: 4em;
 }
 
-
-body{
-  background-color: #f8f5e4;
-
-}
 #graph-area {
   text-align: center;
 }
-
-
 
 .console-area {
   padding: 1em;
@@ -34,9 +50,7 @@ body{
   padding: 2rem;
 }
 
-.game-panel{
 
-}
 .game-label {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 10px;
