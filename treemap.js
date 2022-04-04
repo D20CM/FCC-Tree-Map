@@ -24,12 +24,14 @@ let treeMap = async function () {
   const root = d3.hierarchy(dataset).sum((d) => d.value);
 
   d3.treemap().size([width, height]).padding(2)(root);
+  const fontSize = 12;
 
   svg
     .selectAll("rect")
     .data(root.leaves())
     .enter()
     .append("rect")
+    .attr("class", "game-panel")
     .attr("x", function (d) {
       return d.x0;
     })
@@ -47,28 +49,28 @@ let treeMap = async function () {
       let result = "";
       switch (d.data.category) {
         case "2600":
-          result = "red";
+          result = "#ff454b";
           break;
         case "Wii":
-          result = "blue";
+          result = "#3a73af";
           break;
         case "NES":
-          result = "green";
+          result = "#79ba7d";
           break;
         case "GB":
           result = "pink";
           break;
         case "DS":
-          result = "white";
+          result = "#fff873";
           break;
         case "X360":
-          result = "cyan";
+          result = "#8bd6d5";
           break;
         case "PS3":
           result = "violet";
           break;
         case "PS2":
-          result = "orange";
+          result = "#ffc14d";
           break;
         case "SNES":
           result = "beige";
@@ -80,13 +82,13 @@ let treeMap = async function () {
           result = "cadetBlue";
           break;
         case "3DS":
-          result = "crimson";
+          result = "#fa5269";
           break;
         case "N64":
-          result = "darkOliveGreen";
+          result = "#8aa181";
           break;
         case "PS":
-          result = "darkOrchid";
+          result = "#b17fc7";
           break;
         case "XB":
           result = "darkSalmon";
@@ -114,9 +116,9 @@ let treeMap = async function () {
       return d.x0 + 1;
     })
     .attr("y", function (d) {
-      return d.y0 + 16;
+      return d.y0 + 12;
     })
-    .attr("width", function (d) {
+    .attr("data-width", function (d) {
       return d.x1 - d.x0;
     })
     .attr("height", function (d) {
@@ -125,8 +127,53 @@ let treeMap = async function () {
     .text(function (d) {
       return d.data.name;
     })
-    .attr("font-size", "8px")
-    .attr("fill", "blue");
+    .attr("font-size", `${fontSize}px`)
+    .call(wrapText);
+
+  ////////////////////////Mike Bostock's Text-wrap function/////////////////////
+  //adapted as per https://medium.com/swlh/create-a-treemap-with-wrapping-text-using-d3-and-react-5ba0216c48ce
+
+  function wrapText(selection) {
+    selection.each(function () {
+      const node = d3.select(this);
+      const rectWidth = +node.attr("data-width");
+      let word;
+      const words = node
+        .text()
+        .split(/(\/)|(\s)/)
+        .reverse();
+      let line = [];
+      const x = node.attr("x");
+      const y = node.attr("y");
+      let tspan = node.text("").append("tspan").attr("x", x).attr("y", y);
+      let lineNumber = 0;
+      while (words.length > 0) {
+        word = words.pop();
+        line.push(word);
+        tspan.text(line.join(" "));
+        const tspanLength = tspan.node().getComputedTextLength();
+        if (tspanLength > rectWidth && line.length !== 1) {
+          line.pop();
+          tspan.text(line.join(" "));
+          line = [word];
+          tspan = addTspan(word);
+        }
+      }
+
+      addTspan(words.pop());
+
+      function addTspan(text) {
+        lineNumber += 1;
+        return node
+          .append("tspan")
+          .attr("x", x)
+          .attr("y", y)
+          .attr("dy", `${lineNumber * fontSize}px`)
+          .text(text);
+      }
+    });
+  }
+
   /////////////////////////////////////////////////////////////////////////////////////////////////
 
   const testArea = document.getElementById("test-area");
