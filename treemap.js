@@ -140,6 +140,7 @@ let treeMap = async function () {
       let word;
       const words = node
         .text()
+        //add regex to match white space or forward slash - helps prevent text overflow for certain games
         .split(/(\/)|(\s)/)
         .reverse();
       let line = [];
