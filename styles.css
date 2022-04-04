@@ -4,26 +4,24 @@
 }
 
 h1 {
-  color: rgb(137, 12, 175);
-  background-color: yellow;
+  /* color: rgb(137, 12, 175); */
+  /* background-color: yellow; */
   margin: 0;
   text-align: center;
   padding: 2rem;
   font-size: 4em;
 }
 
+
+body{
+  background-color: #f8f5e4;
+
+}
 #graph-area {
-  background-color: rgb(0, 0, 0);
   text-align: center;
 }
 
-.twentysixhundred {
-  background-color: burlywood;
-}
 
-.wii {
-  background-color: cadetblue;
-}
 
 .console-area {
   padding: 1em;
@@ -36,7 +34,11 @@ h1 {
   padding: 2rem;
 }
 
+.game-panel{
+
+}
 .game-label {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  font-size: 12px;
+  font-size: 10px;
+  margin: 0;  
 }
