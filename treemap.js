@@ -229,7 +229,11 @@ let treeMap = async function () {
     for (let i = 0; i < consoles.length; i++) {
       const consoleArea = document.createElement("div");
       consoleArea.classList.add("console-area");
-      consoleArea.innerText = JSON.stringify(consoles[i].children);
+      // consoleArea.innerText = JSON.stringify(consoles[i].children);
+      console.log(consoles[i]);
+      const h3 = consoles[i].name;
+      consoleArea.innerHTML = `<div class="color-box" style="background-color: ${colorsArray[i]}"></div><h4>${h3}</h4>`;
+      // consoleArea.style.backgroundColor = colorsArray[i];
       testArea.append(consoleArea);
     }
   }

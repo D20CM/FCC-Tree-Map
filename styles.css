@@ -41,13 +41,24 @@ h1 {
 
 .console-area {
   padding: 1em;
+  display: flex;
 }
-.console-area:nth-child(even) {
+
+.color-box{
+  
+  height: 2em;
+  width: 2em;
+  margin-right: 1em;
+}
+/* .console-area:nth-child(even) {
   background-color: rgb(184, 184, 184);
-}
+} */
 
 #test-area {
   padding: 2rem;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
 
