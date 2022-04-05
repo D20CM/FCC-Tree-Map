@@ -5,6 +5,48 @@ const width = 1200;
 const height = 900;
 const margin = { top: 20, right: 20, bottom: 20, left: 20 };
 
+const colorsArray = [
+  "#ff454b",
+  "#3a73af",
+  "#79ba7d",
+  "pink",
+  "#fff873",
+  "#8bd6d5",
+  "violet",
+  "#ffc14d",
+  "beige",
+  "brown",
+  "cadetBlue",
+  "#fa5269",
+  "#8aa181",
+  "#b17fc7",
+  "darkSalmon",
+  "deepSkyBlue",
+  "indianRed",
+  "khaki",
+];
+
+const consoleColors = {
+  twentysixhundred: "#ff454b",
+  wii: "#3a73af",
+  nes: "#79ba7d",
+  gb: "pink",
+  ds: "#fff873",
+  x360: "#8bd6d5",
+  ps3: "violet",
+  ps2: "#ffc14d",
+  snes: "beige",
+  gba: "brown",
+  ps4: "cadetBlue",
+  threeds: "#fa5269",
+  n64: "#8aa181",
+  ps: "#b17fc7",
+  xb: "darkSalmon",
+  pc: "deepSkyBlue",
+  psp: "indianRed",
+  xone: "khaki",
+};
+
 const svg = d3
   .select("#graph-area")
   .append("svg")
@@ -31,7 +73,10 @@ let treeMap = async function () {
     .data(root.leaves())
     .enter()
     .append("rect")
-    .attr("class", "game-panel")
+    .attr("class", "tile")
+    .attr("data-name", (d) => d.data.name)
+    .attr("data-category", (d) => d.data.category)
+    .attr("data-value", (d) => d.data.value)
     .attr("x", function (d) {
       return d.x0;
     })
@@ -49,58 +94,58 @@ let treeMap = async function () {
       let result = "";
       switch (d.data.category) {
         case "2600":
-          result = "#ff454b";
+          result = consoleColors.twentysixhundred;
           break;
         case "Wii":
-          result = "#3a73af";
+          result = consoleColors.wii;
           break;
         case "NES":
-          result = "#79ba7d";
+          result = consoleColors.nes;
           break;
         case "GB":
-          result = "pink";
+          result = consoleColors.gb;
           break;
         case "DS":
-          result = "#fff873";
+          result = consoleColors.ds;
           break;
         case "X360":
-          result = "#8bd6d5";
+          result = consoleColors.x360;
           break;
         case "PS3":
-          result = "violet";
+          result = consoleColors.ps3;
           break;
         case "PS2":
-          result = "#ffc14d";
+          result = consoleColors.ps2;
           break;
         case "SNES":
-          result = "beige";
+          result = consoleColors.snes;
           break;
         case "GBA":
-          result = "brown";
+          result = consoleColors.gba;
           break;
         case "PS4":
-          result = "cadetBlue";
+          result = consoleColors.ps4;
           break;
         case "3DS":
-          result = "#fa5269";
+          result = consoleColors.threeds;
           break;
         case "N64":
-          result = "#8aa181";
+          result = consoleColors.n64;
           break;
         case "PS":
-          result = "#b17fc7";
+          result = consoleColors.ps;
           break;
         case "XB":
-          result = "darkSalmon";
+          result = consoleColors.xb;
           break;
         case "PC":
-          result = "deepSkyBlue";
+          result = consoleColors.pc;
           break;
         case "PSP":
-          result = "indianRed";
+          result = consoleColors.psp;
           break;
         case "XOne":
-          result = "khaki";
+          result = consoleColors.xone;
           break;
       }
       return result;
@@ -148,6 +193,7 @@ let treeMap = async function () {
       const y = node.attr("y");
       let tspan = node.text("").append("tspan").attr("x", x).attr("y", y);
       let lineNumber = 0;
+      //next line adapted as gauranteed last seperate word is not required
       while (words.length > 0) {
         word = words.pop();
         line.push(word);
@@ -183,7 +229,11 @@ let treeMap = async function () {
     for (let i = 0; i < consoles.length; i++) {
       const consoleArea = document.createElement("div");
       consoleArea.classList.add("console-area");
-      consoleArea.innerText = JSON.stringify(consoles[i].children);
+      // consoleArea.innerText = JSON.stringify(consoles[i].children);
+      console.log(consoles[i]);
+      const h3 = consoles[i].name;
+      consoleArea.innerHTML = `<div class="color-box" style="background-color: ${colorsArray[i]}"></div><h4>${h3}</h4>`;
+      // consoleArea.style.backgroundColor = colorsArray[i];
       testArea.append(consoleArea);
     }
   }
