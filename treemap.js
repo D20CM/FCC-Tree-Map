@@ -2,7 +2,7 @@ const url =
   "https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/video-game-sales-data.json";
 
 const width = 1200;
-const height = 700;
+const height = 800;
 const margin = { top: 20, right: 20, bottom: 20, left: 20 };
 
 const colorsArray = [
@@ -195,7 +195,7 @@ let treeMap = async function () {
       return d.x0 + 1;
     })
     .attr("y", function (d) {
-      return d.y0 + 12;
+      return d.y0 + 10;
     })
     .attr("data-width", function (d) {
       return d.x1 - d.x0;
