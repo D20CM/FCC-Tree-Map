@@ -26,7 +26,9 @@
 }
 
 body{
-  background-color: #f8f5e4;
+  /* background-color: #f8f5e4; */
+  background-color: #1f1f1f;
+  color: white;
   text-align: center;
   font-family: 'Nunito', sans-serif;
 
@@ -37,8 +39,10 @@ h1 {
   font-size: 4em;
 }
 
+
 #graph-area {
   text-align: center;
+  margin-bottom: 2em;
 }
 
 #tooltip {
@@ -68,33 +72,43 @@ h1 {
 	border-top-color: #000000;
 	/* filter: drop-shadow(-0.0625rem 0.0625rem 0.0625rem rgba(0, 0, 0, .1)); */
 }
-.console-area {
+/* .console-area {
   padding: 0.5em;
   margin: 0 0.6em;
   display: flex;
   justify-content: left;
   align-items: center;
-}
+} */
 
-.color-box{
+/* .color-box{
   
   height: 2em;
   width: 2em;
   margin-right: 1em;
   
-}
+} */
 
 
 #test-area {
-  padding: 2rem;
-  width: 40%;
-  margin:  2em auto;
+  padding: 0 2rem;
+  width: 80%;
+  margin:  0em auto;
   text-align: center;
   justify-content: center;
   align-items: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr ;
+  /* border: 2px solid blue; */
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr 1fr 1fr ; */
  
+}
+
+
+
+.legend-container{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: auto;
 }
 
 

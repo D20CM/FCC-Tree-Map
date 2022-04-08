@@ -258,22 +258,58 @@ let treeMap = async function () {
   /////////////////////////////////////////////////////////////////////////////////////////////////
 
   const testArea = document.getElementById("test-area");
+  console.log(consoles);
 
-  function displayConsoles() {
-    for (let i = 0; i < consoles.length; i++) {
-      const consoleArea = document.createElement("div");
-      consoleArea.classList.add("console-area");
-      consoleArea.setAttribute("id", "legend");
-      // consoleArea.innerText = JSON.stringify(consoles[i].children);
-      console.log(consoles[i]);
-      const h3 = consoles[i].name;
-      consoleArea.innerHTML = `<div class="color-box" style="background-color: ${colorsArray[i]}"></div><h4>${h3}</h4>`;
-      // consoleArea.style.backgroundColor = colorsArray[i];
-      testArea.append(consoleArea);
-    }
-  }
+  const legend = d3
+    .select("#test-area")
+    .append("svg")
+    // .attr("width", width + margin.left + margin.right)
+    .attr("width", 1000)
+    // .attr("height", height + margin.top + margin.bottom)
+    .attr("height", 200)
+    .attr("class", "legend-container")
+    .attr("id", "legend")
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  displayConsoles();
+  legend
+    .selectAll("rect")
+    .data(consoles)
+    .enter()
+    .append("rect")
+    .attr("class", "legend-item")
+    .attr("x", (d, i) => (i > 8 ? (i - 9) * 110 : 110 * i))
+    .attr("y", (d, i) => (i > 8 ? 60 : 0))
+    .attr("height", 40)
+    .attr("width", 40)
+    .attr("fill", (d, i) => colorsArray[i]);
+
+  legend
+    .selectAll("text")
+    .data(consoles)
+    .enter()
+    .append("text")
+    .attr("x", (d, i) => (i > 8 ? (i - 9) * 110 + 50 : 110 * i + 50))
+    .attr("y", (d, i) => (i > 8 ? 60 : 0) + 20)
+    .text((d, i) => consoles[i].name)
+    .attr("class", "legend-text")
+    .attr("fill", "white");
+
+  // function displayConsoles() {
+  //   for (let i = 0; i < consoles.length; i++) {
+  //     const consoleArea = document.createElement("div");
+  //     consoleArea.classList.add("console-area");
+  //     consoleArea.setAttribute("id", "legend");
+  //     // consoleArea.innerText = JSON.stringify(consoles[i].children);
+  //     console.log(consoles[i]);
+  //     const h3 = consoles[i].name;
+  //     consoleArea.innerHTML = `<div class="color-box" style="background-color: ${colorsArray[i]}"></div><h4>${h3}</h4>`;
+  //     // consoleArea.style.backgroundColor = colorsArray[i];
+  //     testArea.append(consoleArea);
+  //   }
+  // }
+
+  // displayConsoles();
 };
 
 treeMap();
