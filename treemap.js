@@ -163,13 +163,20 @@ let treeMap = async function () {
       let category = d.data.category;
       let value = d.data.value;
 
-      tooltip.text(
-        "Name: " + name + ", Category: " + category + ", Value: " + value
+      tooltip.html(
+        "Name: " +
+          name +
+          ",<br> Category: " +
+          category +
+          ", <br>Value: " +
+          value
       );
       return tooltip.style("visibility", "visible");
     })
     .on("mousemove", function (d) {
-      return tooltip.style("top", d.y1 + "px").style("left", d.x0 + "px");
+      return tooltip
+        .style("top", d3.event.pageY - 30 + "px")
+        .style("left", d3.event.pageX + 10 + "px");
     })
 
     .on("mouseout", function () {
