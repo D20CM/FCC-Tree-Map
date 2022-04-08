@@ -1,13 +1,13 @@
 const url =
   "https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/video-game-sales-data.json";
 
-const width = 1300;
+const width = 1200;
 const height = 700;
 const margin = { top: 20, right: 20, bottom: 20, left: 20 };
 
 const colorsArray = [
   "#ff454b",
-  "#3a73af",
+  "#39afea",
   "#79ba7d",
   "pink",
   "#fff873",
@@ -21,14 +21,14 @@ const colorsArray = [
   "#8aa181",
   "#b17fc7",
   "darkSalmon",
-  "deepSkyBlue",
+  "#00d9ff",
   "indianRed",
   "khaki",
 ];
 
 const consoleColors = {
   twentysixhundred: "#ff454b",
-  wii: "#3a73af",
+  wii: "#39afea",
   nes: "#79ba7d",
   gb: "pink",
   ds: "#fff873",
@@ -42,7 +42,7 @@ const consoleColors = {
   n64: "#8aa181",
   ps: "#b17fc7",
   xb: "darkSalmon",
-  pc: "deepSkyBlue",
+  pc: "#00d9ff",
   psp: "indianRed",
   xone: "khaki",
 };
@@ -74,7 +74,7 @@ let treeMap = async function () {
   const root = d3.hierarchy(dataset).sum((d) => d.value);
 
   d3.treemap().size([width, height]).padding(2)(root);
-  const fontSize = 12;
+  const fontSize = 10;
 
   svg
     .selectAll("rect")
@@ -171,12 +171,14 @@ let treeMap = async function () {
           ", <br>Value: " +
           value
       );
-      return tooltip.style("visibility", "visible");
+      return tooltip
+        .style("visibility", "visible")
+        .attr("data-value", d.data.value);
     })
     .on("mousemove", function (d) {
       return tooltip
-        .style("top", d3.event.pageY - 30 + "px")
-        .style("left", d3.event.pageX + 10 + "px");
+        .style("top", d3.event.pageY - 90 + "px")
+        .style("left", d3.event.pageX + 6 + "px");
     })
 
     .on("mouseout", function () {
