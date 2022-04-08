@@ -1,8 +1,8 @@
 const url =
   "https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/video-game-sales-data.json";
 
-const width = 1200;
-const height = 900;
+const width = 1300;
+const height = 700;
 const margin = { top: 20, right: 20, bottom: 20, left: 20 };
 
 const colorsArray = [
@@ -54,6 +54,14 @@ const svg = d3
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+const tooltip = d3
+  .select("body")
+  .append("div")
+  .attr("id", "tooltip")
+  .style("visibility", "hidden")
+  .style("position", "absolute")
+  .style("z-index", "10");
 
 let treeMap = async function () {
   const response = await fetch(url);
@@ -149,6 +157,23 @@ let treeMap = async function () {
           break;
       }
       return result;
+    })
+    .on("mouseover", function (d) {
+      let name = d.data.name;
+      let category = d.data.category;
+      let value = d.data.value;
+
+      tooltip.text(
+        "Name: " + name + ", Category: " + category + ", Value: " + value
+      );
+      return tooltip.style("visibility", "visible");
+    })
+    .on("mousemove", function (d) {
+      return tooltip.style("top", d.y1 + "px").style("left", d.x0 + "px");
+    })
+
+    .on("mouseout", function () {
+      return tooltip.style("visibility", "hidden");
     });
 
   svg
@@ -229,6 +254,7 @@ let treeMap = async function () {
     for (let i = 0; i < consoles.length; i++) {
       const consoleArea = document.createElement("div");
       consoleArea.classList.add("console-area");
+      consoleArea.setAttribute("id", "legend");
       // consoleArea.innerText = JSON.stringify(consoles[i].children);
       console.log(consoles[i]);
       const h3 = consoles[i].name;
